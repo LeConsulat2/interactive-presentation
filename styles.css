@@ -1,0 +1,391 @@
+/* AUT international conversion story — design tokens.
+ *
+ * THE SINGLE SOURCE OF TRUTH for this piece's look. The generator
+ * (scripts/graphics/build_aut_story.py) inlines this file into the output HTML
+ * and swaps the @font-face url() for a data: URI. Do not restate a value from
+ * here as a literal in the generator or the composition — a literal hex in a
+ * scene is a defect.
+ *
+ * Reasoning, with the why, in DESIGN-SYSTEM.md next door.
+ * Neutral portfolio theme (introductory-capability-story.md section 14): it must
+ * not imitate AUT's website, palette or logo.
+ */
+
+:root {
+  /* ---------------------------------------------------------------- ground */
+  /* Cool near-white. A document, not a brand surface. Never pure white. */
+  --paper:            #FBFBFC;
+  --paper-sunk:       #F1F3F5;   /* insets, panel wells, the article ground */
+  --paper-edge:       #E2E5EA;   /* hairline between panels */
+
+  /* ----------------------------------------------- cinematic bookends */
+  /* The poster and end card borrow the darkness of a cinema screen while
+   * the argument itself stays on the light, document-like canvas. */
+  --cinema:           #090B12;
+  --cinema-ink:       #F4F1EC;
+  --cinema-soft:      #AAA8B3;
+
+  /* ------------------------------------------------------------------ ink */
+  --ink:              #14181D;   /* headlines, the one held line */
+  --ink-soft:         #4E555F;   /* body copy — 8.0:1 on --paper */
+  --ink-faint:        #646C77;   /* captions, labels, axis ticks — 4.9:1 on --paper */
+  --ink-ghost:        #97A0AC;   /* rules, the resting journey line, decoration */
+
+  /* --------------------------------------------------- the journey spine */
+  /* The horizontal line the whole piece returns to. Structural, quiet, never
+   * an accent. Nodes are formal stages; the line between them is where the
+   * friction lives. */
+  --line:             #B4BCC6;
+  --line-strong:      #7C8794;   /* a segment under attention */
+  --node:             #FBFBFC;   /* node fill = paper, so the ring reads */
+  --node-ring:        #7C8794;
+
+  /* --------------------------------------------------- accent — the applicant */
+  /* Exactly one accent, one meaning: the person moving through the journey and
+   * the next step they are trying to see. Considered blue — institutional
+   * without being navy, calm rather than urgent. Never decoration. */
+  --accent:           #1F6F8B;
+  --accent-bright:    #2E93AE;   /* a live edge: something resolving, right now */
+  --accent-wash:      #E4EEF1;
+  --accent-ink:       #0C3A49;   /* type on an accent field */
+
+  /* -------------------------------------- "correct, but not yet usable" */
+  /* The muted second colour. Accurate information that still leaves someone
+   * unsure — "further documentation may be required". Warm ochre, tired on
+   * purpose. It is never allowed to look inviting. */
+  --stale:            #7E6636;
+  --stale-wash:       #F2ECDF;
+
+  /* ------------------------------------------------ one friction flag */
+  /* Structural friction only: a hand-off that drops, a wait with no signal.
+   * Terracotta, not signal red. At most a few times in the whole piece. */
+  --flag:             #A94C38;
+  --flag-wash:        #F5E4DF;
+
+  /* -------------------------------------------------------------- type */
+  /* Both named families are embedded by the generator. Each stack names ONE
+   * real family on purpose: every extra named fallback is a chance for a
+   * compiler or browser to reach for a system install instead of the file we
+   * ship. */
+  --font-sans: 'Pretendard Variable', sans-serif;
+  --font-display-serif: 'Fraunces Variable', serif;
+  --font-mono: ui-monospace, 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+
+  --numeric: tabular-nums lining-nums;
+
+  /* Scale is for the 1280x720 motion canvas. The surrounding page does NOT use
+   * these — it has its own rem/clamp() scale in build_aut_story.py's page_css. */
+  --size-display:     92px;  --weight-display: 620;  --lh-display: 0.98;
+  --size-h1:          41px;  --weight-h1:      640;  --lh-h1:      1.14;
+  --size-h2:          31px;  --weight-h2:      600;  --lh-h2:      1.22;
+  --size-h3:          24px;  --weight-h3:      580;  --lh-h3:      1.3;
+  --size-body:        19px;  --weight-body:    400;  --lh-body:    1.5;
+  --size-lead:        23px;  --weight-lead:    440;  --lh-lead:    1.46;
+  --size-label:       14px;  --weight-label:   580;  --lh-label:   1.3;
+  --size-caption:     14px;  --weight-caption: 400;  --lh-caption: 1.4;
+
+  --track-display:  -0.022em;
+  --track-h1:       -0.016em;
+  --track-label:     0.09em;
+
+  /* ----------------------------------------------------------- spacing */
+  /* 8px base. A 1920x1080 frame is 240 x 135 of these. */
+  --space-1:    8px;
+  --space-2:   16px;
+  --space-3:   24px;
+  --space-4:   32px;
+  --space-5:   48px;
+  --space-6:   64px;
+  --space-7:   96px;
+  --space-8:  128px;
+
+  /* Safe margin on the 1280x720 motion canvas. Nothing readable crosses it. */
+  --margin-x:   88px;
+  --margin-y:   60px;
+
+  /* ------------------------------------------------------------ surface */
+  --radius-sm:   4px;
+  --radius-md:  10px;
+  --radius-lg:  18px;
+  --hairline:   1px;
+  --rule:       2px;
+  --shadow-card: 0 1px 2px rgba(16,20,24,.05), 0 10px 28px rgba(16,20,24,.09);
+  --shadow-lift: 0 4px 10px rgba(16,20,24,.06), 0 26px 60px rgba(16,20,24,.14);
+
+  /* -------------------------------------------------- motion — seconds */
+  /* Every value is a whole number of frames at 30fps. Read straight into GSAP. */
+  --dur-tick:    0.2s;   /*  6f */
+  --dur-quick:   0.4s;   /* 12f */
+  --dur-base:    0.6s;   /* 18f */
+  --dur-slow:    0.9s;   /* 27f */
+  --dur-hold:    1.2s;   /* 36f */
+  --dur-settle:  2.0s;   /* 60f */
+  --stagger:     0.5s;   /* 15f — between revealed lines within a scene */
+}
+
+/* Numeric elements must use tabular figures or counters jitter sideways. */
+.ds-figure, .ds-numeric { font-variant-numeric: var(--numeric); }
+
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none !important}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;background:var(--cinema)}
+body{background:var(--cinema);color:var(--ink);font-family:var(--font-sans);
+  font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-ink)}
+a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visible{
+  outline:3px solid var(--accent-bright);outline-offset:2px;border-radius:3px}
+.skip{position:fixed;left:-999px;top:0;z-index:200;background:var(--paper);color:var(--ink);padding:.6rem 1rem}
+.skip:focus{left:.5rem;top:.5rem}
+
+/* ---------------------------------------------------------- the film */
+#film{position:relative;width:100%;height:100vh;height:100svh;min-height:460px;
+  display:grid;place-items:center;background:var(--cinema);overflow:hidden}
+#viewport{position:relative;width:min(100vw, calc(100svh * 16 / 9));
+  aspect-ratio:16/9;max-width:100vw;overflow:hidden;background:var(--paper);
+  box-shadow:0 24px 90px rgba(0,0,0,.55)}
+#root{position:absolute;top:0;left:0;width:1280px;height:720px;transform-origin:top left;
+  transform:scale(var(--stage-scale,1));font-family:var(--font-sans);color:var(--ink);
+  perspective:1400px}
+
+/* poster = the film's title card */
+#poster{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;gap:1.1rem;
+  padding:clamp(1.5rem,5vw,3rem);background:var(--cinema);color:var(--cinema-ink);overflow:hidden}
+#poster::before{content:"";position:absolute;width:min(72vw,860px);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,rgba(31,111,139,.23) 0%,rgba(31,111,139,0) 68%);
+  left:50%;top:47%;transform:translate(-50%,-50%);pointer-events:none}
+#poster>*{position:relative;z-index:1}
+#poster .eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent-bright);margin:0}
+#poster h1{font-family:var(--font-display-serif);font-size:clamp(2.35rem,7.2vw,6.6rem);
+  font-weight:610;line-height:.92;letter-spacing:-.042em;margin:0;max-width:17ch;
+  color:var(--cinema-ink);font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 144}
+#poster h1 .display-line{display:block;padding-bottom:.08em}
+#poster h1 .display-accent{color:var(--accent-bright);font-style:italic;
+  font-variation-settings:"SOFT" 75,"WONK" 1,"opsz" 144}
+#poster .dek{font-size:clamp(.9rem,1.7vw,1.12rem);color:var(--cinema-soft);margin:0;
+  max-width:50ch;line-height:1.55}
+.play-big{margin-top:.3rem;display:inline-flex;align-items:center;gap:.65rem;font:inherit;
+  font-size:1.02rem;font-weight:600;cursor:pointer;color:var(--cinema-ink);background:var(--accent);
+  border:0;border-radius:100px;padding:.85rem 1.7rem}
+.play-big:hover{background:var(--accent-bright)}
+.play-big::before{content:"";border-style:solid;border-width:.46rem 0 .46rem .78rem;
+  border-color:transparent transparent transparent var(--cinema-ink)}
+.poster-read{font-size:.85rem;color:var(--cinema-soft);text-decoration:underline;
+  text-underline-offset:2px;margin-top:-.3rem}
+.poster-read:hover{color:var(--cinema-ink)}
+#poster .disclosure{position:absolute;left:0;right:0;bottom:clamp(.8rem,3vw,1.6rem);
+  font-size:.74rem;color:var(--cinema-soft);margin:0;padding:0 1rem;background:none;border:0}
+
+/* controls: a player bar that auto-hides while playing */
+#controls{position:absolute;left:0;right:0;bottom:0;z-index:30;display:flex;flex-wrap:wrap;
+  align-items:center;gap:.55rem;padding:.7rem .9rem;
+  background:linear-gradient(to top,rgba(10,12,15,.86),rgba(10,12,15,0));
+  color:var(--cinema-ink);font-size:.8rem;opacity:0;transition:opacity .25s ease;pointer-events:none}
+#film.show-ui #controls,#controls:focus-within{opacity:1;pointer-events:auto}
+#controls button{font:inherit;font-size:.8rem;cursor:pointer;color:var(--cinema-ink);
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  border-radius:6px;padding:.4rem .7rem}
+#controls button:hover{background:rgba(255,255,255,.24)}
+#controls button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--cinema-ink)}
+#seek{flex:1 1 7rem;min-width:5rem;accent-color:var(--accent-bright)}
+#clock{font-family:var(--font-mono);font-variant-numeric:var(--numeric);
+  min-width:6rem;color:var(--cinema-soft)}
+#scene-step{display:flex;gap:.35rem;align-items:center}
+#controls .spacer{flex:1 1 1rem}
+#controls .read-link{color:var(--cinema-soft);text-decoration:underline;text-underline-offset:2px;white-space:nowrap}
+
+/* endcard */
+#endcard{position:absolute;inset:0;z-index:25;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;gap:1.1rem;
+  padding:clamp(1.5rem,5vw,3rem);background:var(--cinema);color:var(--cinema-ink)}
+#endcard .end-h{font-family:var(--font-display-serif);font-size:clamp(2rem,5.2vw,5.2rem);
+  font-weight:610;color:var(--cinema-ink);margin:0;max-width:18ch;line-height:.96;
+  letter-spacing:-.038em;font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 144}
+#endcard .end-h .display-line{display:block;padding-bottom:.08em}
+#endcard .end-h .display-accent{font-style:italic;color:var(--accent-bright);
+  font-variation-settings:"SOFT" 75,"WONK" 1,"opsz" 144}
+#endcard .cta-btn{display:inline-block;font:inherit;font-weight:600;text-decoration:none;
+  color:var(--cinema-ink);background:var(--accent);border-radius:100px;padding:.8rem 1.6rem}
+#endcard .cta-btn:hover{background:var(--accent-bright)}
+#endcard .cta-note{font-size:.76rem;color:var(--cinema-soft);margin:0;max-width:42ch;line-height:1.5}
+#endcard .end-row{display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap;justify-content:center}
+#endcard .end-row button,#endcard .end-row a{font:inherit;font-size:.88rem;cursor:pointer;
+  background:none;border:0;color:var(--cinema-soft);text-decoration:underline;text-underline-offset:2px}
+
+/* a quiet way down to the written version */
+.read-hint{position:absolute;left:0;right:0;bottom:.5rem;z-index:15;text-align:center;
+  font-size:.74rem;opacity:.5;transition:opacity .2s;pointer-events:auto}
+.read-hint a{color:var(--cinema-soft);text-decoration:none}
+.read-hint:hover{opacity:1}
+#film.playing .read-hint{opacity:0;pointer-events:none}
+
+/* ------------------------------------------------ the written version */
+#read{background:var(--paper);color:var(--ink)}
+#read .wrap{max-width:52rem;margin:0 auto;padding:3.5rem 1.25rem 1rem}
+.read-intro{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent-ink);margin:0 0 .5rem}
+.disclosure{font-size:.8125rem;letter-spacing:.02em;color:var(--ink-faint);
+  background:var(--paper-sunk);border:var(--hairline) solid var(--paper-edge);
+  border-radius:100px;padding:.35rem .85rem;display:inline-block;margin:0 0 2rem}
+article#case h2{font-size:clamp(1.3rem,3.4vw,1.7rem);font-weight:620;line-height:1.2;
+  margin:2.75rem 0 .5rem;letter-spacing:-.01em}
+article#case h3{font-size:1.15rem;font-weight:600;margin:1.75rem 0 .35rem;color:var(--ink)}
+article#case p{margin:0 0 1rem;color:var(--ink-soft)}
+article#case .lead-note{font-size:.95rem;color:var(--ink-faint);font-style:italic;margin-bottom:1.25rem}
+.arc{list-style:none;margin:1rem 0 0;padding:0;counter-reset:arc}
+.arc>li{counter-increment:arc;padding:1.1rem 0 1.1rem 3rem;position:relative;
+  border-top:var(--hairline) solid var(--paper-edge)}
+.arc>li::before{content:counter(arc,decimal-leading-zero);position:absolute;left:0;top:1.15rem;
+  font-family:var(--font-mono);font-size:.8rem;color:var(--accent-ink);
+  background:var(--accent-wash);border-radius:6px;padding:.15rem .4rem}
+.arc h3{margin:0 0 .3rem}
+.arc p{margin:0;color:var(--ink-soft)}
+table.mtree{width:100%;border-collapse:collapse;margin:1rem 0 1.25rem;font-size:.92rem}
+table.mtree th,table.mtree td{text-align:left;vertical-align:top;padding:.6rem .7rem;
+  border-bottom:var(--hairline) solid var(--paper-edge)}
+table.mtree th{color:var(--ink-faint);font-weight:560;font-size:.8rem;text-transform:uppercase;
+  letter-spacing:.04em}
+.mtree-wrap{overflow-x:auto}
+ul.plain{margin:0 0 1rem;padding-left:1.2rem}
+ul.plain li{margin-bottom:.4rem;color:var(--ink-soft)}
+.cta{margin:2.5rem 0 1rem;padding:1.5rem;background:var(--accent-wash);border-radius:var(--radius-md)}
+.cta p{margin:0 0 .75rem;color:var(--accent-ink)}
+.cta a.cta-btn{display:inline-block;text-decoration:none;font-weight:600;color:var(--cinema-ink);
+  background:var(--accent);border-radius:100px;padding:.7rem 1.4rem}
+.cta a.cta-btn:hover{background:var(--accent-bright)}
+.cta .cta-note{font-size:.82rem;color:var(--ink-faint);margin:.75rem 0 0}
+.sources{margin:2rem 0 0;font-size:.9rem}
+.sources li{margin-bottom:.6rem;color:var(--ink-faint)}
+.sources a{color:var(--accent-ink)}
+footer{background:var(--paper);border-top:var(--hairline) solid var(--paper-edge);
+  max-width:52rem;margin:0 auto;padding:2rem 1.25rem 3rem;font-size:.85rem;color:var(--ink-faint)}
+footer p{margin:.3rem 0}
+@media (max-width:640px){
+  #read .wrap{padding-top:2.5rem}
+  .arc>li{padding-left:2.4rem}
+  #controls{font-size:.76rem}
+  table.mtree{font-size:.85rem}
+}
+@media (prefers-reduced-motion:reduce){ *{scroll-behavior:auto !important} }
+
+
+/* ---- motion canvas internals (1280x720; #viewport/#root live in page_css) ---- */
+#root .scene{position:absolute;inset:0;display:flex;align-items:center;
+  padding:var(--margin-y) var(--margin-x) 104px;visibility:hidden;opacity:0;
+  backface-visibility:hidden;transform-style:preserve-3d}
+#root .col{position:relative;width:100%}
+#root .word{display:inline-block;white-space:nowrap;transform-origin:50% 80%}
+#root .scene-h{font-size:var(--size-h1);font-weight:var(--weight-h1);line-height:var(--lh-h1);
+  letter-spacing:var(--track-h1);margin:0 0 var(--space-4)}
+#root .display-scene{font-family:var(--font-display-serif);font-size:var(--size-display);
+  font-weight:var(--weight-display);line-height:var(--lh-display);letter-spacing:-.035em;
+  max-width:980px;margin-bottom:var(--space-4)}
+#root .display-line{display:block;overflow:hidden;padding-bottom:.07em}
+#root .display-accent{font-style:italic;color:var(--accent);font-variation-settings:"SOFT" 65,"WONK" 1,"opsz" 120}
+#root .scene-h.center{text-align:center;margin-bottom:var(--space-4)}
+#root .line,#root .note,#root .turn,#root .example,#root .ask,#root .stage-note,
+#root .skill,#root .tangible{font-size:var(--size-lead);
+  font-weight:var(--weight-lead);line-height:var(--lh-lead);color:var(--ink-soft);
+  margin:0 0 var(--space-3);max-width:940px}
+#root .note{font-size:var(--size-body);color:var(--ink-faint)}
+#root .turn{color:var(--ink);font-weight:560;font-size:var(--size-h3);line-height:var(--lh-h3)}
+#root .ask{color:var(--accent-ink);font-weight:560;border-left:var(--rule) solid var(--accent);
+  padding-left:var(--space-2);font-size:var(--size-lead)}
+#root .example{font-size:var(--size-body);color:var(--stale);background:var(--stale-wash);
+  padding:var(--space-2) var(--space-3);border-radius:var(--radius-sm);max-width:900px}
+#root .turn-label{display:inline-block;font-size:var(--size-label);font-weight:var(--weight-label);
+  letter-spacing:var(--track-label);text-transform:uppercase;color:var(--accent-ink);
+  background:var(--accent-wash);padding:4px 11px;border-radius:100px;margin:0 0 var(--space-2)}
+/* scene: questions */
+#root .qlist{list-style:none;margin:0 0 var(--space-3);padding:0}
+#root .qlist .q{font-size:29px;font-weight:560;line-height:1.28;color:var(--ink);
+  padding-left:var(--space-3);border-left:var(--rule) solid var(--line);margin-bottom:var(--space-2)}
+/* scene: task */
+#root .parts{list-style:none;margin:0 0 var(--space-4);padding:0}
+#root .parts .part{display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-2)}
+#root .parts .tick{flex:0 0 auto;width:24px;height:24px;border-radius:100px;
+  background:var(--accent-wash);position:relative}
+#root .parts .tick::after{content:"";position:absolute;left:8px;top:5px;width:6px;height:12px;
+  border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(40deg)}
+#root .parts .pt{font-size:var(--size-lead);color:var(--ink-soft)}
+/* scene: between */
+#root .stages{display:flex;flex-wrap:wrap;gap:8px 8px;margin:0 0 var(--space-2)}
+#root .stages .stage{font-size:var(--size-label);font-weight:var(--weight-label);
+  letter-spacing:.02em;color:var(--ink);background:var(--paper-sunk);
+  border:var(--hairline) solid var(--paper-edge);padding:5px 11px;border-radius:100px}
+#root .gaps{list-style:none;margin:0 0 var(--space-3);padding:0;display:flex;flex-wrap:wrap;
+  gap:8px 8px;max-width:960px}
+#root .gaps .gap{font-size:var(--size-body);color:var(--flag);background:var(--flag-wash);
+  padding:5px 11px;border-radius:var(--radius-sm)}
+/* scene: view */
+#root .two{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);max-width:1040px;
+  margin:0 auto var(--space-3)}
+#root .pane-label{font-size:var(--size-label);font-weight:var(--weight-label);
+  letter-spacing:var(--track-label);text-transform:uppercase;color:var(--ink-faint);
+  margin:0 0 var(--space-2)}
+#root .two ul{list-style:none;margin:0;padding:0}
+#root .two li{font-size:var(--size-body);color:var(--ink-soft);line-height:1.42;
+  margin-bottom:var(--space-2);padding-left:var(--space-2);border-left:2px solid var(--line)}
+#root .pane-close li{border-left-color:var(--accent)}
+#root .note.center{text-align:center}
+#root .pattern{max-width:880px;margin:0 auto var(--space-2);pointer-events:none}
+#root .pattern-svg{display:block;width:100%;height:auto;overflow:visible}
+#root .pattern .pt{fill:var(--ink-faint)}
+#root .pattern .trend{fill:none;stroke:var(--accent);stroke-width:2.5;
+  stroke-linecap:round;stroke-linejoin:round}
+/* scene: interventions */
+#root .opts{list-style:none;margin:0 0 var(--space-3);padding:0}
+#root .opts .opt{display:flex;align-items:baseline;gap:var(--space-2);margin-bottom:9px}
+#root .opts .opt:nth-child(2){margin-left:18px}
+#root .opts .opt:nth-child(3){margin-left:36px}
+#root .opts .opt:nth-child(4){margin-left:54px}
+#root .opts .opt:nth-child(5){margin-left:72px}
+#root .opts .spoke{flex:0 0 auto;width:34px;height:2px;background:var(--line-strong);
+  transform-origin:left center;position:relative;top:-5px}
+#root .opts .opt:nth-child(2) .spoke{width:46px}
+#root .opts .opt:nth-child(3) .spoke{width:58px}
+#root .opts .opt:nth-child(4) .spoke{width:70px}
+#root .opts .opt:nth-child(5) .spoke{width:82px;background:var(--accent)}
+#root .opts .ot{font-size:var(--size-body);color:var(--ink-soft)}
+#root .skill{color:var(--ink);font-weight:560;font-size:var(--size-h3);line-height:var(--lh-h3)}
+#root .tangible{font-size:var(--size-body)}
+/* scene: trust */
+#root .trio{list-style:none;margin:var(--space-3) 0 0;padding:0}
+#root .trio li{font-size:var(--size-lead);font-weight:540;line-height:1.35;color:var(--ink);
+  margin-bottom:var(--space-2);padding-left:var(--space-2);border-left:var(--rule) solid var(--accent)}
+/* scene: loop */
+#root .steps{list-style:none;margin:0;padding:0;display:grid;
+  grid-template-columns:repeat(4,1fr);gap:22px 28px;max-width:1080px;position:relative}
+#root .steps::before{content:"";position:absolute;left:14px;right:14px;top:14px;height:calc(100% - 28px);
+  border:2px solid var(--line);border-left-color:var(--accent);border-right-color:var(--accent);
+  border-radius:42px;pointer-events:none}
+#root .steps .step{display:grid;grid-template-columns:auto 1fr;grid-auto-rows:auto;
+  column-gap:12px;align-items:baseline;position:relative;background:var(--paper);z-index:1;padding-right:8px}
+#root .steps .step:nth-child(n+5){grid-row:2}
+#root .steps .step:nth-child(5){grid-column:4}
+#root .steps .step:nth-child(6){grid-column:3}
+#root .steps .step:nth-child(7){grid-column:2}
+#root .steps .sn{grid-row:1/3;width:28px;height:28px;border-radius:100px;
+  border:2px solid var(--accent);color:var(--accent-ink);font-weight:640;
+  display:flex;align-items:center;justify-content:center;font-size:14px}
+#root .steps .sl{font-size:19px;font-weight:600;color:var(--ink)}
+#root .steps .sd{font-size:var(--size-caption);color:var(--ink-faint);grid-column:2}
+#root .loopback{display:block;height:2px;background:var(--accent);margin-top:var(--space-3);
+  transform-origin:left center;max-width:1080px}
+/* scene: close */
+#root .col-center{text-align:center}
+#root .col-center .line{font-size:var(--size-h2);font-weight:var(--weight-h2);line-height:var(--lh-h2);
+  color:var(--ink);max-width:none;margin:0 auto var(--space-2)}
+#root .col-center .coda{font-family:var(--font-display-serif);font-size:68px;font-weight:600;
+  line-height:1;letter-spacing:-.034em;color:var(--ink);margin:var(--space-4) auto 0}
+#root .display-close .display-accent{color:var(--accent)}
+/* the spine — a ground line near the base of the canvas */
+#root #spine{position:absolute;inset:0;overflow:visible}
+#root #spine-line,#root #spine-seg{stroke-linecap:round}
+#root #spine-line{stroke:var(--line);stroke-width:2.5}
+#root #spine-seg{stroke:var(--accent);stroke-width:4}
+#root #spine .node{fill:var(--node);stroke:var(--node-ring);stroke-width:2}
+#root #mover{fill:var(--accent)}
