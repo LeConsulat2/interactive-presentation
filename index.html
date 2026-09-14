@@ -6,8 +6,8 @@
 <meta name="robots" content="noindex">
 <title>Making the next step clear</title>
 <meta name="description" content="An independent portfolio prototype about a public service journey — how one person who understands the work can now shape data, process, wording and design to make the next step clearer for applicants and everyone helping them. Not affiliated with or endorsed by AUT.">
-<link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="fonts.css">
 </head>
 <body>
 <a class="skip" href="#read">Skip to the written version</a>
@@ -36,7 +36,7 @@
     <p class="disclosure">Independent portfolio prototype based on public information. Not affiliated with or endorsed by AUT.</p>
   </div>
   <div id="controls" hidden>
-    <button id="pp" type="button">Pause</button>
+    <button id="pp" type="button">Play</button>
     <button id="replay" type="button">Replay</button>
     <input id="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek through the story">
     <span id="clock">0.0 / 100 s</span>
@@ -310,7 +310,7 @@
   var rmBtn = document.getElementById('rm'), fsBtn = document.getElementById('fs');
   var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : {matches:false};
 
-  var reduced = !!mq.matches;
+  var reduced = false;
   var started=false, playing=false, ended=false, raf=null, last=null, t=0, sceneIdx=0, uiTimer=null;
 
   function clampT(x){ return x<0?0:(x>DURATION?DURATION:x); }
@@ -340,7 +340,7 @@
   }
   function setPlaying(v){
     playing=v;
-    pp.textContent = playing ? "Pause" : "Resume";
+    pp.textContent = playing ? "Pause" : (t > 0 ? "Resume" : "Play");
     film.classList.toggle('playing', playing);
     if (playing){
       ended=false; endcard.hidden=true;
@@ -363,7 +363,14 @@
     stepWrap.hidden=!reduced;
     pp.hidden=reduced; replay.hidden=reduced; seek.hidden=reduced; clock.hidden=reduced;
     rmBtn.setAttribute('aria-pressed', String(reduced));
-    if (reduced){ if (playing) setPlaying(false); endcard.hidden=true; gotoScene(sceneIdx); showUI(true); }
+    if (reduced){
+      if (playing) setPlaying(false);
+      endcard.hidden=true;
+      gotoScene(sceneIdx);
+      showUI(true);
+    } else {
+      pp.textContent = playing ? "Pause" : (t > 0 ? "Resume" : "Play");
+    }
   }
   function start(){
     if (started) return;
@@ -386,8 +393,11 @@
   document.addEventListener('visibilitychange', function(){ if (!document.hidden) last=null; });
   document.getElementById('prev').addEventListener('click', function(){ gotoScene(sceneIdx-1); });
   document.getElementById('next').addEventListener('click', function(){ gotoScene(sceneIdx+1); });
-  rmBtn.addEventListener('click', function(){ reduced=!reduced; applyMode(); });
-  if (mq.addEventListener) mq.addEventListener('change', function(e){ reduced=e.matches; applyMode(); });
+  rmBtn.addEventListener('click', function(){
+    reduced=!reduced;
+    applyMode();
+    if (!reduced && !playing && started) { setPlaying(true); }
+  });
 
   function toggleFS(){
     var rq = film.requestFullscreen || film.webkitRequestFullscreen;
